@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # 1. Load your saved model and scaler
-model = joblib.load('./models/medical_cost_model.pkl')
+model = joblib.load('./models/medical_cost_gb_model.pkl')
 scaler = joblib.load('./models/scaler.pkl')
 
 # 2. Design the Web Page UI
