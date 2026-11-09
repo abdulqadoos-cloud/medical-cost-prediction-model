@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import joblib
 
 # 1. Load your saved model and scaler
@@ -53,8 +54,11 @@ if st.button("Predict Charges"):
     num_cols = ['age', 'bmi', 'children']
     input_data[num_cols] = scaler.transform(input_data[num_cols])
     
-    # Make the prediction
-    prediction = model.predict(input_data)[0]
+    # Make the prediction (if trained on log charges, use np.exp; otherwise, comment out np.exp if trained on raw charges)
+    prediction_log = model.predict(input_data)[0]
+    
+    # If your model was trained on log-transformed target charges, keep np.exp():
+    prediction = np.exp(prediction_log)
     
     # Display the result nicely on the page
     st.success(f"Estimated Medical Charges: **${prediction:,.2f}**")
