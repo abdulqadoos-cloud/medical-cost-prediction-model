@@ -5,22 +5,21 @@ An end-to-end Machine Learning web application that predicts individual medical 
 ---
 
 ## 📊 Project Overview
-Healthcare costs vary significantly depending on factors like age, body mass index (BMI), smoking status, and family size. This project explores the **Medical Cost Personal Dataset** to uncover key cost drivers, train a predictive regression model, and deploy it as an interactive web app.
+Healthcare costs vary significantly depending on factors like age, body mass index (BMI), smoking status, and family size. This project explores the **Medical Cost Personal Dataset** to uncover key cost drivers, train an optimized regression model, and deploy it as an interactive web app.
 
-- **Target Variable:** Unscaled continuous numerical target (`charges` in USD).
-- **Key Insights Discovered:** Smoking status (`smoker`) and `age` have the strongest linear correlation with high medical bills.
+- **Target Variable:** Continuous numerical target (`charges` in USD), log-transformed during training to handle extreme right-skewed outliers.
+- **Key Insights Discovered:** Smoking status (`smoker`) combined with `age` and `bmi` creates exponential cost jumps that non-linear tree models capture exceptionally well.
 
 ---
 
 ## 🤖 Model Performance
-A Linear Regression model was trained on an 80/20 train-test split after proper categorical encoding (Binary & One-Hot Encoding) and feature scaling (`StandardScaler`).
+After evaluating baseline models and applying a log transformation to the target variable, the final **Gradient Boosting Regressor** achieved strong generalization performance:
 
-- **$R^2$ Score:** `0.7836` (Explains ~78% of the variance in medical charges)
-- **Mean Absolute Error (MAE):** `$4,181.19`
-- **Root Mean Squared Error (RMSE):** `$5,796.28`
+- **$R^2$ Score:** `0.8731` (Explains ~87% of the variance in medical charges)
+- **Mean Absolute Error (MAE):** `$2,104.69` (Average prediction error cut nearly in half)
+- **Root Mean Squared Error (RMSE):** `$4,438.19`
 
 ---
-
 ## 🛠️ Tech Stack & Libraries
 - **Language:** Python 3.12
 - **Data Manipulation & Analysis:** Pandas, NumPy
